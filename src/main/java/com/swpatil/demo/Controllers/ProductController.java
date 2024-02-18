@@ -12,7 +12,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public void getProductById(){
+    public void getProductById(@PathVariable("id") Long id){
 
     }
 
