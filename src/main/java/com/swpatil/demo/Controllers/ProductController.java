@@ -17,8 +17,8 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public void updateProductById(){
-
+    public String updateProductById(@PathVariable("id") Long id){
+        return "Update the product whose id is: " + id;
     }
 
     @PostMapping()
