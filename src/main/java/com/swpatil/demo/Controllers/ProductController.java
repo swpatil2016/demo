@@ -8,10 +8,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-
+    ProductService productService;
+/*
+            Type of dependency injection
+    -> Field injection
     @Autowired
     ProductService productService;
 
+    -> Constructor injection
+    -> Using setterMethode
+ */
+
+    // -> Constructor injection. This is more popular than field injection because of some points.
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
     @GetMapping()
     public void getAllProducts(){
 
