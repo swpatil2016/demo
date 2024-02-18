@@ -25,6 +25,18 @@ public class FakeStoreProductService implements ProductService{
                         "https://fakestoreapi.com/products/{id}",
                         FakeStoreProductDto.class,
                         id);
-        return null;
+        FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
+        return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
+    }
+    public GenericProductDto convertFakeStoreDtoToGenericProductDto(FakeStoreProductDto fakeStoreProductDto){
+        GenericProductDto genericProductDto = new GenericProductDto();
+        genericProductDto.setId(fakeStoreProductDto.getId());
+        genericProductDto.setCategory(fakeStoreProductDto.getCategory());
+        genericProductDto.setImage(fakeStoreProductDto.getImage());
+        genericProductDto.setDescription(fakeStoreProductDto.getDescription());
+        genericProductDto.setTitle(fakeStoreProductDto.getTitle());
+        genericProductDto.setPrice(fakeStoreProductDto.getPrice());
+
+        return genericProductDto;
     }
 }
