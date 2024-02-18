@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Primary
 @Service("FakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
@@ -39,6 +41,15 @@ public class FakeStoreProductService implements ProductService{
 
         FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
+    }
+
+    @Override
+    public List<GenericProductDto> getAllProducts() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<List<FakeStoreProductDto>> listResponseEntity = restTemplate.getForEntity(
+                "https://fakestoreapi.com/products",
+                List<FakeStoreProductDto.class>);
+        return null;
     }
 
     public GenericProductDto convertFakeStoreDtoToGenericProductDto(FakeStoreProductDto fakeStoreProductDto){
