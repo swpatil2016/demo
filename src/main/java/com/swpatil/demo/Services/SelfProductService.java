@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 public class SelfProductService implements ProductService{
     @Override
     public GenericProductDto getProductById(Long id) {
+        System.out.println("Call from Self Product");
         return null;
     }
 }

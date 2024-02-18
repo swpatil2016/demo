@@ -22,7 +22,7 @@ public class ProductController {
 
     // -> Constructor injection. This is more popular than field injection because of some points.
     @Autowired
-    public ProductController(@Qualifier("FakeStoreProductService") ProductService productService) {
+    public ProductController(@Qualifier("SelfProductService") ProductService productService) {
         this.productService = productService;
     }
     @GetMapping()

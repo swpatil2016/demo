@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class FakeStoreProductService implements ProductService{
     @Override
     public GenericProductDto getProductById(Long id) {
+        System.out.println("Call from FakeStore");
         return null;
     }
 }
