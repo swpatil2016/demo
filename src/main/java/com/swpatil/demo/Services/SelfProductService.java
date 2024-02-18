@@ -3,8 +3,8 @@ package com.swpatil.demo.Services;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import org.springframework.stereotype.Service;
 
-@Service("FakeStoreProductService")
-public class FakeStoreProductService implements ProductService{
+@Service("SelfProductService")
+public class SelfProductService implements ProductService{
     @Override
     public GenericProductDto getProductById(Long id) {
         return null;
