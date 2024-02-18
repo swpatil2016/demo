@@ -10,4 +10,9 @@ public class SelfProductService implements ProductService{
         System.out.println("Call from Self Product");
         return null;
     }
+
+    @Override
+    public GenericProductDto createProduct(GenericProductDto genericProductDto) {
+        return null;
+    }
 }

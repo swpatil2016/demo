@@ -42,6 +42,6 @@ public class ProductController {
 
     @PostMapping()
     public GenericProductDto createProduct(@RequestBody GenericProductDto genericProductDto){
-        return null;
+        return productService.createProduct(genericProductDto);
     }
 }

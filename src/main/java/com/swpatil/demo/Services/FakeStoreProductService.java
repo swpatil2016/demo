@@ -28,6 +28,19 @@ public class FakeStoreProductService implements ProductService{
         FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }
+
+    @Override
+    public GenericProductDto createProduct(GenericProductDto genericProductDto) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.postForEntity(
+                "https://fakestoreapi.com/products",
+                genericProductDto,
+                FakeStoreProductDto.class);
+
+        FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
+        return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
+    }
+
     public GenericProductDto convertFakeStoreDtoToGenericProductDto(FakeStoreProductDto fakeStoreProductDto){
         GenericProductDto genericProductDto = new GenericProductDto();
         genericProductDto.setId(fakeStoreProductDto.getId());
