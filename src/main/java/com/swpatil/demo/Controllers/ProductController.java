@@ -3,6 +3,7 @@ package com.swpatil.demo.Controllers;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import com.swpatil.demo.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +22,7 @@ public class ProductController {
 
     // -> Constructor injection. This is more popular than field injection because of some points.
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("FakeStoreProductService") ProductService productService) {
         this.productService = productService;
     }
     @GetMapping()
