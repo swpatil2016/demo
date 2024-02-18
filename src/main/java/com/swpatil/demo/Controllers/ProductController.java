@@ -1,5 +1,6 @@
 package com.swpatil.demo.Controllers;
 
+import com.swpatil.demo.Dtos.GenericProductDto;
 import com.swpatil.demo.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 public class ProductController {
 
-
+    @Autowired
     ProductService productService;
 
     @GetMapping()
@@ -17,8 +18,8 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public void getProductById(@PathVariable("id") Long id){
-        productService.getProductById(id);
+    public GenericProductDto getProductById(@PathVariable("id") Long id){
+       return productService.getProductById(id);
     }
 
     @PutMapping("{id}")
