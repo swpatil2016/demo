@@ -1,5 +1,6 @@
 package com.swpatil.demo.Services;
 
+import com.swpatil.demo.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Primary;
@@ -17,8 +18,12 @@ public class FakeStoreProductService implements ProductService{
 
     @Override
     public GenericProductDto getProductById(Long id) {
-        System.out.println("Call from FakeStore");
         RestTemplate restTemplate = restTemplateBuilder.build();
+
+        restTemplate.getForEntity(
+                "https://fakestoreapi.com/products/{id}",
+                FakeStoreProductDto.class,
+                id);
         return null;
     }
 }
