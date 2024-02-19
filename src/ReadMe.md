@@ -19,3 +19,11 @@
 
     -ParameterizTypeReference maintain that type data in list at time of run.so we can
     use list.
+
+4:- Exception handling
+    -If we pass some random product id like 123 we saw the nullPointerException and other things
+    on PostMan because if we not handle any exception Spring does this on behalf of us and handle 
+    the exception. 
+    -We can create our own exception and allow things what we want to send Postman(Front end)
+    -when we pass this id to fakeStore API it returns some metaData which contains
+    error,status which catch by ResponseEntity.
