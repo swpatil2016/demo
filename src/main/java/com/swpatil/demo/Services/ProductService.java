@@ -1,11 +1,12 @@
 package com.swpatil.demo.Services;
 
 import com.swpatil.demo.Dtos.GenericProductDto;
+import com.swpatil.demo.Exceptions.NotFoundProduct;
 
 import java.util.List;
 
 public interface ProductService {
-    public GenericProductDto getProductById(Long id);
+    public GenericProductDto getProductById(Long id) throws NotFoundProduct;
 
     public GenericProductDto createProduct(GenericProductDto genericProductDto);
 

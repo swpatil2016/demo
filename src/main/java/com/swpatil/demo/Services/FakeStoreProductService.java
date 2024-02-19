@@ -2,6 +2,7 @@ package com.swpatil.demo.Services;
 
 import com.swpatil.demo.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
+import com.swpatil.demo.Exceptions.NotFoundProduct;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
@@ -22,7 +23,7 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public GenericProductDto getProductById(Long id) {
+    public GenericProductDto getProductById(Long id) throws NotFoundProduct {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
         ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.getForEntity(
@@ -30,6 +31,9 @@ public class FakeStoreProductService implements ProductService{
                         FakeStoreProductDto.class,
                         id);
         FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
+        if(fakeStoreProductDto == null){
+            throw new NotFoundProduct("Product with id: " + id + " not found.");
+        }
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }
 

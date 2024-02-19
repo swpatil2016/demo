@@ -1,9 +1,13 @@
 package com.swpatil.demo.Controllers;
 
+import com.swpatil.demo.Dtos.ExceptionDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
+import com.swpatil.demo.Exceptions.NotFoundProduct;
 import com.swpatil.demo.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id){
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundProduct {
        return productService.getProductById(id);
     }
 
