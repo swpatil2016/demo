@@ -55,4 +55,8 @@ public class ProductController {
     public GenericProductDto deleteProductById(@PathVariable("id") Long id){
         return productService.deleteProductById(id);
     }
+    @ExceptionHandler(NotFoundProduct.class)
+    public ExceptionDto handleNotFoundExcetion(NotFoundProduct notFoundProduct){
+        return new ExceptionDto(notFoundProduct.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }
