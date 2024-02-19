@@ -56,7 +56,8 @@ public class ProductController {
         return productService.deleteProductById(id);
     }
     @ExceptionHandler(NotFoundProduct.class)
-    public ExceptionDto handleNotFoundExcetion(NotFoundProduct notFoundProduct){
-        return new ExceptionDto(notFoundProduct.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ExceptionDto> handleNotFoundExcetion(NotFoundProduct notFoundProduct){
+        return new ResponseEntity<>(new ExceptionDto(notFoundProduct.getMessage(), HttpStatus.NOT_FOUND),
+                HttpStatus.NOT_FOUND);
     }
 }
