@@ -4,6 +4,7 @@ import com.swpatil.demo.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -63,12 +64,15 @@ public class FakeStoreProductService implements ProductService{
     @Override
     public GenericProductDto deleteProductById(Long id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-       ResponseEntity<FakeStoreProductDto> responseEntity =  restTemplate.delete(
+        ResponseEntity<FakeStoreProductDto> responseEntity =  restTemplate.exchange(
                 "https://fakestoreapi.com/products/{id}",
+                HttpMethod.DELETE,
+                null,
                 FakeStoreProductDto.class,
                 id
         );
-        return null;
+        FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
+        return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }
 
     public GenericProductDto convertFakeStoreDtoToGenericProductDto(FakeStoreProductDto fakeStoreProductDto){
