@@ -49,7 +49,7 @@ public class FakeStoreProductService implements ProductService{
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto[]> listResponseEntity = restTemplate.getForEntity(
                 "https://fakestoreapi.com/products",
-                FakeStoreProductDto[].class);
+                FakeStoreProductDto[].class); // Try to use list and ParameterizedTypeReference<List<FakeStoreProductDto>>
 
         FakeStoreProductDto[] fakeStoreProductDtos = listResponseEntity.getBody();
         List<GenericProductDto> genericProductDtos = new ArrayList<>();
