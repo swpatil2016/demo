@@ -22,4 +22,9 @@ public class SelfProductService implements ProductService{
     public List<GenericProductDto> getAllProducts() {
         return null;
     }
+
+    @Override
+    public GenericProductDto deleteProductById(Long id) {
+        return null;
+    }
 }
