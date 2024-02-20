@@ -1,16 +1,12 @@
 package com.swpatil.demo.Services;
 
-import com.swpatil.demo.Dtos.FakeStoreProductDto;
+import com.swpatil.demo.ThirdPartyCommunicate.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import com.swpatil.demo.Exceptions.NotFoundProduct;
 import com.swpatil.demo.ThirdPartyCommunicate.FakeStoreProductClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;

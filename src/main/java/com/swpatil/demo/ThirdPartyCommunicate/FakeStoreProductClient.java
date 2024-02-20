@@ -1,6 +1,6 @@
 package com.swpatil.demo.ThirdPartyCommunicate;
 
-import com.swpatil.demo.Dtos.FakeStoreProductDto;
+import com.swpatil.demo.ThirdPartyCommunicate.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import com.swpatil.demo.Exceptions.NotFoundProduct;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -8,9 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class FakeStoreProductClient {

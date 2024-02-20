@@ -1,4 +1,4 @@
-package com.swpatil.demo.Dtos;
+package com.swpatil.demo.ThirdPartyCommunicate.Dtos;
 
 import lombok.Getter;
 import lombok.Setter;
