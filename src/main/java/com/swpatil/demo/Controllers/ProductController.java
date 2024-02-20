@@ -55,9 +55,10 @@ public class ProductController {
     public GenericProductDto deleteProductById(@PathVariable("id") Long id){
         return productService.deleteProductById(id);
     }
-    @ExceptionHandler(NotFoundProduct.class)
-    public ResponseEntity<ExceptionDto> handleNotFoundExcetion(NotFoundProduct notFoundProduct){
-        return new ResponseEntity<>(new ExceptionDto(notFoundProduct.getMessage(), HttpStatus.NOT_FOUND),
-                HttpStatus.NOT_FOUND);
-    }
+    // Specific to controller
+//    @ExceptionHandler(NotFoundProduct.class)
+//    public ResponseEntity<ExceptionDto> handleNotFoundExcetion(NotFoundProduct notFoundProduct){
+//        return new ResponseEntity<>(new ExceptionDto(notFoundProduct.getMessage(), HttpStatus.NOT_FOUND),
+//                HttpStatus.NOT_FOUND);
+//    }
 }
