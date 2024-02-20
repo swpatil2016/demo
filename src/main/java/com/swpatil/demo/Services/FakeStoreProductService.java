@@ -3,6 +3,8 @@ package com.swpatil.demo.Services;
 import com.swpatil.demo.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import com.swpatil.demo.Exceptions.NotFoundProduct;
+import com.swpatil.demo.ThirdPartyCommunicate.FakeStoreProductClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
@@ -16,47 +18,29 @@ import java.util.List;
 @Primary
 @Service("FakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
-    RestTemplateBuilder restTemplateBuilder;
+    FakeStoreProductClient fakeStoreProductClient;
 
-    public FakeStoreProductService(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplateBuilder = restTemplateBuilder;
+    @Autowired
+    public FakeStoreProductService(FakeStoreProductClient fakeStoreProductClient) {
+        this.fakeStoreProductClient = fakeStoreProductClient;
     }
 
-    @Override
     public GenericProductDto getProductById(Long id) throws NotFoundProduct {
-        RestTemplate restTemplate = restTemplateBuilder.build();
-
-        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.getForEntity(
-                        "https://fakestoreapi.com/products/{id}",
-                        FakeStoreProductDto.class,
-                        id);
-        FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
-        if(fakeStoreProductDto == null){
-            throw new NotFoundProduct("Product with id: " + id + " not found.");
-        }
+         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.getProductById(id);
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }
 
-    @Override
+
     public GenericProductDto createProduct(GenericProductDto genericProductDto) {
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.postForEntity(
-                "https://fakestoreapi.com/products",
-                genericProductDto,
-                FakeStoreProductDto.class);
 
-        FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
+        FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.createProduct(genericProductDto);
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }
 
-    @Override
-    public List<GenericProductDto> getAllProducts() {
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto[]> listResponseEntity = restTemplate.getForEntity(
-                "https://fakestoreapi.com/products",
-                FakeStoreProductDto[].class); // Try to use list and ParameterizedTypeReference<List<FakeStoreProductDto>>
 
-        FakeStoreProductDto[] fakeStoreProductDtos = listResponseEntity.getBody();
+    public List<GenericProductDto> getAllProducts() {
+
+        FakeStoreProductDto[] fakeStoreProductDtos = fakeStoreProductClient.getAllProducts();
         List<GenericProductDto> genericProductDtos = new ArrayList<>();
 
         for(FakeStoreProductDto fakeStoreProductDto: fakeStoreProductDtos){
@@ -65,17 +49,9 @@ public class FakeStoreProductService implements ProductService{
         return genericProductDtos;
     }
 
-    @Override
     public GenericProductDto deleteProductById(Long id) {
-        RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<FakeStoreProductDto> responseEntity =  restTemplate.exchange(
-                "https://fakestoreapi.com/products/{id}",
-                HttpMethod.DELETE,
-                null,
-                FakeStoreProductDto.class,
-                id
-        );
-        FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
+
+        FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.deleteProductById(id);
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }
 
