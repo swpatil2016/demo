@@ -28,14 +28,12 @@ public class FakeStoreProductService implements ProductService{
 
 
     public GenericProductDto createProduct(GenericProductDto genericProductDto) {
-
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.createProduct(genericProductDto);
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }
 
 
     public List<GenericProductDto> getAllProducts() {
-
         FakeStoreProductDto[] fakeStoreProductDtos = fakeStoreProductClient.getAllProducts();
         List<GenericProductDto> genericProductDtos = new ArrayList<>();
 
@@ -46,7 +44,6 @@ public class FakeStoreProductService implements ProductService{
     }
 
     public GenericProductDto deleteProductById(Long id) {
-
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.deleteProductById(id);
         return convertFakeStoreDtoToGenericProductDto(fakeStoreProductDto);
     }

@@ -11,8 +11,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class FakeStoreProductClient {
-    RestTemplateBuilder restTemplateBuilder;
+    private String productUrl = "https://fakestoreapi.com/products/{id}";
+    private String productRqUrl = "https://fakestoreapi.com/products";
 
+
+    RestTemplateBuilder restTemplateBuilder;
     public FakeStoreProductClient(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplateBuilder = restTemplateBuilder;
     }
@@ -21,7 +24,7 @@ public class FakeStoreProductClient {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
         ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.getForEntity(
-                "https://fakestoreapi.com/products/{id}",
+                productUrl,
                 FakeStoreProductDto.class,
                 id);
         FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
@@ -35,7 +38,7 @@ public class FakeStoreProductClient {
     public FakeStoreProductDto createProduct(GenericProductDto genericProductDto) {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.postForEntity(
-                "https://fakestoreapi.com/products",
+                productRqUrl,
                 genericProductDto,
                 FakeStoreProductDto.class);
 
@@ -47,7 +50,7 @@ public class FakeStoreProductClient {
     public FakeStoreProductDto[] getAllProducts() {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto[]> listResponseEntity = restTemplate.getForEntity(
-                "https://fakestoreapi.com/products",
+                productRqUrl,
                 FakeStoreProductDto[].class); // Try to use list and ParameterizedTypeReference<List<FakeStoreProductDto>>
 
         FakeStoreProductDto[] fakeStoreProductDtos = listResponseEntity.getBody();
@@ -57,7 +60,7 @@ public class FakeStoreProductClient {
     public FakeStoreProductDto deleteProductById(Long id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> responseEntity =  restTemplate.exchange(
-                "https://fakestoreapi.com/products/{id}",
+                productUrl,
                 HttpMethod.DELETE,
                 null,
                 FakeStoreProductDto.class,
