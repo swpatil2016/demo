@@ -27,3 +27,5 @@
     -We can create our own exception and allow things what we want to send Postman(Front end)
     -when we pass this id to fakeStore API it returns some metaData which contains
     error,status which catch by ResponseEntity.
+
+5:-
