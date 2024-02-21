@@ -19,8 +19,8 @@ public class Product extends BaseModel {
     @ManyToOne
     private Category category;
 
-    public static void main(String[] args) {
-        UUID id = UUID.randomUUID();
-        System.out.println(id);
-    }
+//    public static void main(String[] args) {
+//        UUID id = UUID.randomUUID();
+//        System.out.println(id);
+//    }
 }
