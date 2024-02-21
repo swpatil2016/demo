@@ -3,6 +3,7 @@ package com.swpatil.demo.ThirdPartyCommunicate;
 import com.swpatil.demo.ThirdPartyCommunicate.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.Dtos.GenericProductDto;
 import com.swpatil.demo.Exceptions.NotFoundProduct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class FakeStoreProductClient {
+
     private String productUrl = "https://fakestoreapi.com/products/{id}";
     private String productRqUrl = "https://fakestoreapi.com/products";
 

@@ -1,10 +1,12 @@
 package com.swpatil.demo.Models;
 
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Category {
+@Entity
+public class Category extends BaseModel {
     private String name;
 }
