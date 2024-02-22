@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Mentor {
+public class Mentor extends User {
     private Long salary;
 }
