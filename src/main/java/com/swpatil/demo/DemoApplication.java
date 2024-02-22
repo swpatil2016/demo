@@ -1,7 +1,7 @@
 package com.swpatil.demo;
 
-import com.swpatil.demo.Inheritance.MappedSuperClass.Student;
-import com.swpatil.demo.Inheritance.MappedSuperClass.StudentRepository;
+import com.swpatil.demo.Inheritance.SingleTable.Student;
+import com.swpatil.demo.Inheritance.SingleTable.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
+
 	StudentRepository studentRepository;
 
-	@Autowired
 	public DemoApplication(StudentRepository studentRepository) {
 		this.studentRepository = studentRepository;
 	}
@@ -29,5 +29,7 @@ public class DemoApplication implements CommandLineRunner {
 		student.setName("Bhuvan");
 
 		studentRepository.save(student);
+
+
 	}
 }

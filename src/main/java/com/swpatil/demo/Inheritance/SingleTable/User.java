@@ -6,9 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Entity(name =  "S_User")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class S_User {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

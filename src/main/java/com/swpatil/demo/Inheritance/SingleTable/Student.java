@@ -6,10 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-public class
-S_TA extends S_User {
-    private String startTime;
-    private String endTime;
-
+@Entity(name =  "S_Student")
+public class Student extends User {
+    private String batch;
+    private double psp;
 }
+
