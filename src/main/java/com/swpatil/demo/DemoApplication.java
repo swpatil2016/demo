@@ -7,7 +7,6 @@ import com.swpatil.demo.Models.Category;
 import com.swpatil.demo.Models.Product;
 import com.swpatil.demo.Repository.CategoryRepository;
 import com.swpatil.demo.Repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,7 +22,9 @@ public class DemoApplication implements CommandLineRunner {
 	CategoryRepository categoryRepository;
 	ProductRepository productRepository;
 
-	public DemoApplication(StudentRepository studentRepository, CategoryRepository categoryRepository, ProductRepository productRepository) {
+	public DemoApplication(StudentRepository studentRepository,
+						   CategoryRepository categoryRepository,
+						   ProductRepository productRepository) {
 		this.studentRepository = studentRepository;
 		this.categoryRepository = categoryRepository;
 		this.productRepository = productRepository;
@@ -42,31 +43,35 @@ public class DemoApplication implements CommandLineRunner {
 //		student.setName("Bhuvan");
 //
 //		studentRepository.save(student);
-
-
+//
+//
 //		Category category = new Category();
 //		category.setName("electronic");
 //
 //		categoryRepository.save(category);
 //
 //		Product product = new Product();
-//		product.setPrice(45L);
-//		product.setImage("image");
+//		product.setPrice(4L);
+//		product.setImage("imagebv");
 //		product.setCategory(category);
-//		product.setDescription("description");
-//		product.setTitle("product");
+//		product.setDescription("description123");
+//		product.setTitle("product123");
 //
 //
 //		productRepository.save(product);
+//
+//		Optional<Category> categoryOptional =
+//				categoryRepository.findById(UUID.fromString("3C9801AF-8E14-49F9-A45B-96D442B02A6B"));
+//
+//
+//		if(!categoryOptional.isEmpty()){
+//			Category category = categoryOptional.get();
+//			System.out.println(category.getProducts());
+//		}
 
-		Optional<Category> categoryOptional =
-				categoryRepository.findById(UUID.fromString("3C9801AF-8E14-49F9-A45B-96D442B02A6B"));
-
-
-		if(!categoryOptional.isEmpty()){
-			Category category = categoryOptional.get();
-			System.out.println(category.getProducts());
-		}
+        List<Product> product1 = productRepository.getAll();
+        System.out.println(product1);
 
 	}
 }
+
