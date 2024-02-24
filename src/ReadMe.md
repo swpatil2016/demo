@@ -28,4 +28,6 @@
     -when we pass this id to fakeStore API it returns some metaData which contains
     error,status which catch by ResponseEntity.
 
-5:-
+5:- UUID standard Format:- In a workbench uuid will show in this format <���I��[��B�*k.
+    -To convert use this Query select HEX(column_name) from table;
+    -Insert the hyphen manually in uuid(8-4-4-4-16).
