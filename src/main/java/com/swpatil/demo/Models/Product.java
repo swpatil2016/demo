@@ -23,4 +23,16 @@ public class Product extends BaseModel {
 //        UUID id = UUID.randomUUID();
 //        System.out.println(id);
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "title='" + title + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", category=" + category +
+                '}';
+    }
 }

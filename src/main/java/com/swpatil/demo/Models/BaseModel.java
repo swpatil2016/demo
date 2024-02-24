@@ -1,12 +1,10 @@
 package com.swpatil.demo.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.GenericGenerators;
 
 
 import java.util.UUID;
@@ -15,9 +13,11 @@ import java.util.UUID;
 @Setter
 @MappedSuperclass
 public class BaseModel {
+
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(generator = "uuidgenerator")
+    @GenericGenerator(name = "genericgenerator", strategy = "uuid2")
     @Column(name = "id", columnDefinition = "binary(16)", nullable = false, updatable = false)
     private UUID id;
+
 }
