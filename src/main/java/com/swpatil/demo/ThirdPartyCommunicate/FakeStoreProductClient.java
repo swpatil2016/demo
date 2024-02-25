@@ -46,7 +46,9 @@ public class FakeStoreProductClient {
                 productRqUrl,
                 genericProductDto,
                 FakeStoreProductDto.class);
-
+        if(responseEntity == null){
+            return null;
+        }
         FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
         return fakeStoreProductDto;
     }

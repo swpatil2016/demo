@@ -1,5 +1,6 @@
 package com.swpatil.demo.ThirdPartyCommunicateTest;
 
+import com.swpatil.demo.Dtos.GenericProductDto;
 import com.swpatil.demo.Exceptions.NotFoundProduct;
 import com.swpatil.demo.ThirdPartyCommunicate.Dtos.FakeStoreProductDto;
 import com.swpatil.demo.ThirdPartyCommunicate.FakeStoreProductClient;
@@ -28,6 +29,8 @@ public class FakeStoreProductClientTest {
     @Autowired
     FakeStoreProductClient fakeStoreProductClient;
 
+    @MockBean
+    GenericProductDto genericProductDtoMock;
     @Test
     public void TestGetProductByIdForNullCheck() throws NotFoundProduct {
         when(restTemplateBuilderMock.build())
@@ -37,6 +40,20 @@ public class FakeStoreProductClientTest {
                 .thenReturn(null);
 
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.getProductById(1L);
+
+        Assertions.assertNull(fakeStoreProductDto);
+
+    }
+
+    @Test
+    public void TestCreateProductForNullCheck(){
+        when(restTemplateBuilderMock.build())
+                .thenReturn(restTemplateMock);
+
+        when(restTemplateMock.postForEntity(productRqUrl, genericProductDtoMock, FakeStoreProductDto.class))
+                .thenReturn(null);
+
+        FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.createProduct(genericProductDtoMock);
 
         Assertions.assertNull(fakeStoreProductDto);
 
