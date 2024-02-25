@@ -79,4 +79,20 @@ public class FakeStoreProductClientTest {
 
     }
 
+    @Test
+    public void TestCreateProduct(){
+        FakeStoreProductDto fakeStoreProductDtoExpected = new FakeStoreProductDto();
+        fakeStoreProductDtoExpected.setTitle("Android");
+
+        when(restTemplateBuilderMock.build())
+                .thenReturn(restTemplateMock);
+
+        when(restTemplateMock.postForEntity(productRqUrl, genericProductDtoMock, FakeStoreProductDto.class))
+                .thenReturn(new ResponseEntity(fakeStoreProductDtoExpected, HttpStatus.OK));
+
+        FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.createProduct(genericProductDtoMock);
+
+        Assertions.assertEquals(fakeStoreProductDtoExpected.getTitle(), "Android");
+
+    }
 }
