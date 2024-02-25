@@ -29,6 +29,9 @@ public class FakeStoreProductClient {
                 productUrl,
                 FakeStoreProductDto.class,
                 id);
+        if(responseEntity == null){
+            return null;
+        }
         FakeStoreProductDto fakeStoreProductDto = responseEntity.getBody();
         if(fakeStoreProductDto == null){
             throw new NotFoundProduct("Product with id: " + id + " not found.");
