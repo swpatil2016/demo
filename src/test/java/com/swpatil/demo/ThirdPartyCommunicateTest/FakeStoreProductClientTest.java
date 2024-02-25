@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -31,17 +33,35 @@ public class FakeStoreProductClientTest {
 
     @MockBean
     GenericProductDto genericProductDtoMock;
+
     @Test
     public void TestGetProductByIdForNullCheck() throws NotFoundProduct {
         when(restTemplateBuilderMock.build())
                 .thenReturn(restTemplateMock);
 
-        when(restTemplateMock.getForEntity(productUrl, FakeStoreProductDto.class, any(Long.class)))
+        when(restTemplateMock.getForEntity(productUrl, FakeStoreProductDto.class, Long.class))
                 .thenReturn(null);
 
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.getProductById(1L);
 
         Assertions.assertNull(fakeStoreProductDto);
+
+    }
+
+    @Test
+    public void TestGetProductById() throws NotFoundProduct {
+        FakeStoreProductDto fakeStoreProductDtoExpected = new FakeStoreProductDto();
+        fakeStoreProductDtoExpected.setTitle("iPhone1");
+
+        when(restTemplateBuilderMock.build())
+                .thenReturn(restTemplateMock);
+
+        when(restTemplateMock.getForEntity(productUrl, FakeStoreProductDto.class, Long.class))
+                .thenReturn(new ResponseEntity(fakeStoreProductDtoExpected, HttpStatus.OK));
+
+        FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.getProductById(1L);
+
+        Assertions.assertEquals(fakeStoreProductDtoExpected.getTitle(), "iPhone");
 
     }
 
