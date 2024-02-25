@@ -36,13 +36,13 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-//		Student student = new Student();
-//		student.setBatch("oct 2022");
-//		student.setPsp(30.4);
-//		student.setEmail("Student@gmail.com");
-//		student.setName("Bhuvan");
-//
-//		studentRepository.save(student);
+		Student student = new Student();
+		student.setBatch("oct 2022");
+		student.setPsp(30.4);
+		student.setEmail("Student@gmail.com");
+		student.setName("Bhuvan");
+
+		studentRepository.save(student);
 //
 //
 //		Category category = new Category();
@@ -69,8 +69,8 @@ public class DemoApplication implements CommandLineRunner {
 //			System.out.println(category.getProducts());
 //		}
 
-        List<Product> product1 = productRepository.getAll();
-        System.out.println(product1);
+//        List<Product> product1 = productRepository.getAll();
+//        System.out.println(product1);
 
 	}
 }
