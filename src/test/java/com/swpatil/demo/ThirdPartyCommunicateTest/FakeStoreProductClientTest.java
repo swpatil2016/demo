@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -49,23 +49,6 @@ public class FakeStoreProductClientTest {
     }
 
     @Test
-    public void TestGetProductById() throws NotFoundProduct {
-        FakeStoreProductDto fakeStoreProductDtoExpected = new FakeStoreProductDto();
-        fakeStoreProductDtoExpected.setTitle("iPhone1");
-
-        when(restTemplateBuilderMock.build())
-                .thenReturn(restTemplateMock);
-
-        when(restTemplateMock.getForEntity(productUrl, FakeStoreProductDto.class, Long.class))
-                .thenReturn(new ResponseEntity(fakeStoreProductDtoExpected, HttpStatus.OK));
-
-        FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.getProductById(1L);
-
-        Assertions.assertEquals(fakeStoreProductDtoExpected.getTitle(), "iPhone");
-
-    }
-
-    @Test
     public void TestCreateProductForNullCheck(){
         when(restTemplateBuilderMock.build())
                 .thenReturn(restTemplateMock);
@@ -76,7 +59,6 @@ public class FakeStoreProductClientTest {
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.createProduct(genericProductDtoMock);
 
         Assertions.assertNull(fakeStoreProductDto);
-
     }
 
     @Test
@@ -92,7 +74,28 @@ public class FakeStoreProductClientTest {
 
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.createProduct(genericProductDtoMock);
 
-        Assertions.assertEquals(fakeStoreProductDtoExpected.getTitle(), "Android");
+        Assertions.assertEquals(fakeStoreProductDto.getTitle(), "Android");
+
+    }
+    @Test
+    public void TestGetAllProduct(){
+       FakeStoreProductDto fakeStoreProductDto1 = new FakeStoreProductDto();
+       fakeStoreProductDto1.setTitle("ABC");
+
+        FakeStoreProductDto fakeStoreProductDto2 = new FakeStoreProductDto();
+        fakeStoreProductDto2.setTitle("XYZ");
+
+        FakeStoreProductDto[] fakeStoreProductDtos = new FakeStoreProductDto[2];
+        fakeStoreProductDtos[0] = fakeStoreProductDto1;
+        fakeStoreProductDtos[1] = fakeStoreProductDto2;
+
+        when(restTemplateBuilderMock.build()).thenReturn(restTemplateMock);
+
+        when(restTemplateMock.getForEntity(eq(productRqUrl), eq(FakeStoreProductDto[].class)))
+                .thenReturn(new ResponseEntity(fakeStoreProductDtos, HttpStatus.OK));
+
+        FakeStoreProductDto[] fakeStoreProductDtosList = fakeStoreProductClient.getAllProducts();
+        Assertions.assertEquals(fakeStoreProductDtosList[1].getTitle(), "XYZ");
 
     }
 }
