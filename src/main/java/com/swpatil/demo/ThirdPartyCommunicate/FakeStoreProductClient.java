@@ -29,7 +29,8 @@ public class FakeStoreProductClient {
         ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.getForEntity(
                 productUrl,
                 FakeStoreProductDto.class,
-                id);
+                id
+        );
         if(responseEntity == null){
             return null;
         }

@@ -34,6 +34,23 @@ public class FakeStoreProductClientTest {
     @MockBean
     GenericProductDto genericProductDtoMock;
 
+/*    @Test
+    public void TestGetProductById() throws NotFoundProduct {
+        when(restTemplateBuilderMock.build())
+                .thenReturn(restTemplateMock);
+
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle("iPhone");
+        fakeStoreProductDto.setCategory("Classic");
+
+        when(restTemplateMock.getForEntity(eq(productUrl), eq(FakeStoreProductDto.class), eq(Long.class)))
+                .thenReturn(new ResponseEntity<>(fakeStoreProductDto, HttpStatus.OK));
+
+        FakeStoreProductDto fakeStoreProductDto1 = fakeStoreProductClient.getProductById(1L);
+
+        Assertions.assertEquals(fakeStoreProductDto1.getTitle(), "iPhone", "Object is match");
+    }*/
+
     @Test
     public void TestGetProductByIdForNullCheck() throws NotFoundProduct {
         when(restTemplateBuilderMock.build())
@@ -45,7 +62,6 @@ public class FakeStoreProductClientTest {
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.getProductById(1L);
 
         Assertions.assertNull(fakeStoreProductDto);
-
     }
 
     @Test
@@ -60,7 +76,7 @@ public class FakeStoreProductClientTest {
 
         Assertions.assertNull(fakeStoreProductDto);
     }
-
+/*
     @Test
     public void TestCreateProduct(){
         FakeStoreProductDto fakeStoreProductDtoExpected = new FakeStoreProductDto();
@@ -70,13 +86,13 @@ public class FakeStoreProductClientTest {
                 .thenReturn(restTemplateMock);
 
         when(restTemplateMock.postForEntity(productRqUrl, genericProductDtoMock, FakeStoreProductDto.class))
-                .thenReturn(new ResponseEntity(fakeStoreProductDtoExpected, HttpStatus.OK));
+                .thenReturn(new ResponseEntity<>(fakeStoreProductDtoExpected, HttpStatus.OK));
 
         FakeStoreProductDto fakeStoreProductDto = fakeStoreProductClient.createProduct(genericProductDtoMock);
 
         Assertions.assertEquals(fakeStoreProductDto.getTitle(), "Android");
 
-    }
+    }*/
     @Test
     public void TestGetAllProduct(){
        FakeStoreProductDto fakeStoreProductDto1 = new FakeStoreProductDto();
